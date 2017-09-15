@@ -1,16 +1,20 @@
 {
   "variables": {
+    "vpc_id": null,
+    "subnet_id": null,
+    "base_ami_id": null,
+    "region": "eu-west-1"
   },
   "builders": [
     {
       "type": "amazon-ebs",
-      "region": "eu-west-1",
-      "source_ami": "ami-ebd02392",
+      "region": "{{user `region`}}",
+      "source_ami": "{{user `base_ami_id`}}",
       "instance_type": "t2.micro",
       "ssh_username": "ec2-user",
       "ami_name": "scr {{timestamp}}",
-      "vpc_id": "<vpc-goes-here>",
-      "subnet_id": "<subnet-goes-here>",
+      "vpc_id": "{{user `vpc_id`}}",
+      "subnet_id": "{{user `subnet_id`}}",
       "associate_public_ip_address": true
     }
   ],
