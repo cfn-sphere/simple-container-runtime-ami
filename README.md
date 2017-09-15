@@ -1,6 +1,15 @@
-# Simple Container Runtime AMI
+# Simple Container Runtime AMI (SCR-AMI)
 
 This project creates an AWS EC2 Image containing simple-container-runtime ready to run something configured by instance user-data.
+See https://github.com/cfn-sphere/simple-container-runtime for details about SCR itself!
+
+## Introduction
+
+Architectural decisions are documented in **doc/adr**
+
+- The AMI is designed to use Amazon Linux as a base system
+- Hashicorps Packer (https://www.packer.io) is used to build the AMI
+- Ansible (https://www.ansible.com) is used for everything done to manipulate the base AMI
 
 ## Build
 
@@ -12,7 +21,7 @@ This project uses Hashicorps Packer (https://www.packer.io) to create the AMI. Y
 
     brew install packer
 
-#### Run
+#### Build
 
 get AWS credentials and run:
 
