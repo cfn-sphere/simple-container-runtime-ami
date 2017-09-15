@@ -1,0 +1,19 @@
+- name: make sure required packages are installed
+  yum: name={{item}} state=present enablerepo=epel
+  with_items:
+    - docker
+    - python35
+    - python35-pip
+  tags: scr
+- name: make sure scr python package is installed
+  pip: name=simple-container-runtime state=latest executable=pip-3.5
+  tags: scr
+- name: copy scr init config
+  copy: src=scr.conf dest=/etc/init/scr.conf owner=root group=root mode=0755
+  tags: scr
+- name: make sure docker does not start/stop automatically since this is done by scr service
+  service: name=docker enabled=no state=stopped
+  tags: scr
+- name: make sure scr start automatically
+  service: name=scr enabled=yes state=stopped
+  tags: scr

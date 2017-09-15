@@ -1,0 +1,35 @@
+{
+  "variables": {
+  },
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "region": "eu-west-1",
+      "source_ami": "ami-ebd02392",
+      "instance_type": "t2.micro",
+      "ssh_username": "ec2-user",
+      "ami_name": "scr {{timestamp}}",
+      "vpc_id": "<vpc-goes-here>",
+      "subnet_id": "<subnet-goes-here>",
+      "associate_public_ip_address": true
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": [
+        "sudo pip install ansible"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "src/main/ansible/playbooks/main.yml",
+      "role_paths": [
+        "src/main/ansible/roles/basics",
+        "src/main/ansible/roles/cloudwatch-logs",
+        "src/main/ansible/roles/docker-compose",
+        "src/main/ansible/roles/scr"
+      ]
+    }
+  ]
+}
