@@ -15,7 +15,12 @@
       "ami_name": "scr {{timestamp}}",
       "vpc_id": "{{user `vpc_id`}}",
       "subnet_id": "{{user `subnet_id`}}",
-      "associate_public_ip_address": true
+      "associate_public_ip_address": true,
+      "ami_description": "Simple Container Runtime AMI",
+      "ami_regions": [
+        "eu-west-1",
+        "eu-central-1"
+      ]
     }
   ],
   "provisioners": [
